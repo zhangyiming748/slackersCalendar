@@ -3,7 +3,6 @@ package model
 import (
 	"bufio"
 	"fmt"
-	"github.com/zhangyiming748/slackersCalendar/util/log"
 	"io"
 	"math/rand"
 	"os"
@@ -53,12 +52,12 @@ func Gift() {
 func readLine(src string) []string {
 	fi, err := os.Open(src)
 	if err != nil {
-		log.Info.Printf("打开用户目录文件失败: %s\n", err)
+		//log.Info.Printf("打开用户目录文件失败: %s\n", err)
 		return []string{}
 	}
 	defer func() {
 		if err := fi.Close(); err != nil {
-			log.Info.Printf("关闭用户目录文件失败: %s\n", err)
+			//log.Info.Printf("关闭用户目录文件失败: %s\n", err)
 		}
 	}()
 	names := []string{}
@@ -69,18 +68,18 @@ func readLine(src string) []string {
 			break
 		}
 		names = append(names, string(a))
-		log.Info.Printf("读取到的用户(%s)\n", string(a))
+		//log.Info.Printf("读取到的用户(%s)\n", string(a))
 	}
 	return names
 }
 func isExist(fname string)bool {
 	_, err := os.Stat(fname)
 	if err == nil{
-		log.Info.Println("File exist")
+		//log.Info.Println("File exist")
 		return true
 	}
 	if os.IsNotExist(err){
-		log.Info.Println("File not exist")
+		//log.Info.Println("File not exist")
 		return false
 	}
 	return false
