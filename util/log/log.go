@@ -12,7 +12,7 @@ var (
 )
 func init() {
 
-	info, err2 := os.OpenFile("info.log", os.O_WRONLY|os.O_CREATE, 0666)
+	info, err2 := os.OpenFile("info.txt", os.O_WRONLY|os.O_CREATE, 0666)
 	if err2 != nil {
 		log.Println("打开日志文件错误")
 	}
