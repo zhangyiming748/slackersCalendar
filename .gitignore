@@ -1,13 +1,12 @@
-*.tar
-*.tar.*
-*.jar
-*.exe
-*.msi
-*.zip
-*.tgz
+# 忽略 vendor 文件夹
+vendor
+# 忽略 test 文件夹
+test
+# 忽略 idea 文件夹
+.idea
+# 忽略媒体文件
+users.txt
+*.mp4
+done
+# 忽略日志文件
 *.log
-*.log.*
-*.sig
-
-pkg/
-src/
