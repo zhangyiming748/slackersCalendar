@@ -6,14 +6,43 @@ import (
 	"github.com/zhangyiming748/slackersCalendar/model"
 	"github.com/zhangyiming748/slackersCalendar/util/log"
 	"net/http"
+	"sync"
 )
 
 func Happy(ctx *gin.Context) {
-	line := model.HappyTimer()
-	app1 := model.HappyDay()
-	app2 := model.Gift()
-	app3 := model.AnniversaryDay()
-	app4 := model.HappyFinnal()
+	line := make([]string, 0)
+	app1 := make([]string, 0)
+	app2 := make([]string, 0)
+	app3 := make([]string, 0)
+	app4 := make([]string, 0)
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		line = model.HappyTimer()
+		wg.Done()
+	}()
+	wg.Add(1)
+	go func() {
+		app1 = model.HappyDay()
+		wg.Done()
+	}()
+	wg.Add(1)
+	go func() {
+		app2 = model.Gift()
+		wg.Done()
+	}()
+	wg.Add(1)
+	go func() {
+		app3 = model.AnniversaryDay()
+		wg.Done()
+	}()
+	wg.Add(1)
+	go func() {
+		app4 = model.HappyFinnal()
+		wg.Done()
+	}()
+	wg.Wait()
+
 	line = append(line, app1...)
 	line = append(line, app2...)
 	line = append(line, app3...)
@@ -63,4 +92,11 @@ func getRequestIP(c *gin.Context) string {
 		reqIP = "127.0.0.1"
 	}
 	return reqIP
+}
+func addSlice(master []string, args... []string) []string{
+	log.Info.Println(master)
+	for _,v:=range args{
+		master=append(master,v...)
+	}
+	return master
 }
