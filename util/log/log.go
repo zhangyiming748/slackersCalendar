@@ -10,6 +10,7 @@ var (
 	Info  *log.Logger //只打印
 	Debug *log.Logger //打印并写入文档
 )
+
 func init() {
 
 	info, err2 := os.OpenFile("info.txt", os.O_WRONLY|os.O_CREATE, 0666)
@@ -18,5 +19,5 @@ func init() {
 	}
 
 	Info = log.New(os.Stdout, "", log.Lmsgprefix)
-	Debug = log.New(io.MultiWriter(info, os.Stdout), "",log.Lmsgprefix)
+	Debug = log.New(io.MultiWriter(info, os.Stdout), "", log.Lmsgprefix)
 }

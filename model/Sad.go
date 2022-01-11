@@ -15,11 +15,12 @@ func init() {
 
 	sort.Sort(SadSlice(Lyingflat))
 }
+
 /*
 距离高考还有147天
- */
-func SadDay()[]string {
-	result :=make([]string,0)
+*/
+func SadDay() []string {
+	result := make([]string, 0)
 
 	for _, v := range Lyingflat {
 		if v.GetSubDay() < 0 {
@@ -30,7 +31,7 @@ func SadDay()[]string {
 			continue
 		}
 
-		result = append(result,strings.Join([]string{"距离",v.GetChineseName(),"还有",strconv.Itoa(v.GetSubDay()),"天"},""))
+		result = append(result, strings.Join([]string{"距离", v.GetChineseName(), "还有", strconv.Itoa(v.GetSubDay()), "天"}, ""))
 	}
 	return result
 }

@@ -1,4 +1,4 @@
-package slackersCalendar
+package main
 
 import (
 	"github.com/zhangyiming748/slackersCalendar/http"

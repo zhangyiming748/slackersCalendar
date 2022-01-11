@@ -43,24 +43,47 @@ func Happy(ctx *gin.Context) {
 	}()
 	wg.Wait()
 
-	line = append(line, app1...)
-	line = append(line, app2...)
-	line = append(line, app3...)
-	line = append(line, app4...)
+	result := make([]string, 0)
+	wg.Add(1)
+	go func() {
+		result = addSlice(line, app1, app2, app3, app4)
+		wg.Done()
+	}()
+	wg.Wait()
 	content := HappyJson{
 		Title:    "Happy",
-		Contents: line,
+		Contents: result,
 		Ip:       getRequestIP(ctx),
 	}
 	ctx.JSON(http.StatusOK, content)
 }
 func Sad(ctx *gin.Context) {
-	line := model.SadTimer()
-	app1 := model.SadDay()
-	line = append(line, app1...)
+	line := make([]string, 0)
+	app1 := make([]string, 0)
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		line = model.SadTimer()
+		wg.Done()
+	}()
+	wg.Add(1)
+	go func() {
+		app1 = model.SadDay()
+		wg.Done()
+	}()
+	wg.Wait()
+
+	wg.Add(1)
+	result := make([]string, 0)
+	go func() {
+		result = addSlice(line, app1)
+		wg.Done()
+	}()
+	wg.Wait()
+
 	content := SadJson{
 		Title:    "Happy",
-		Contents: line,
+		Contents: result,
 		Ip:       getRequestIP(ctx),
 	}
 	ctx.JSON(http.StatusOK, content)
@@ -93,10 +116,9 @@ func getRequestIP(c *gin.Context) string {
 	}
 	return reqIP
 }
-func addSlice(master []string, args... []string) []string{
-	log.Info.Println(master)
-	for _,v:=range args{
-		master=append(master,v...)
+func addSlice(master []string, args ...[]string) []string {
+	for _, v := range args {
+		master = append(master, v...)
 	}
 	return master
 }

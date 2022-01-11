@@ -1,4 +1,5 @@
 package model
+
 //anniversary
 var (
 	AS    AnniversarySlice
@@ -45,10 +46,12 @@ func (s AnniversarySlice) Swap(i, j int) { // 重写 Swap() 方法
 func (s AnniversarySlice) Less(i, j int) bool { // 重写 Less() 方法， 从大到小排序
 	return s[i].subday < s[j].subday
 }
+
 //Gift
 var (
-	words = []string{"年轻的时候千万不要因为没钱而绝望,因为你要知道,你以后没钱的日子还很多","铁打的身体,磁铁打的床"}
+	words = []string{"年轻的时候千万不要因为没钱而绝望,因为你要知道,你以后没钱的日子还很多", "铁打的身体,磁铁打的床"}
 )
+
 //timer
 var HappyWeekDayMap = map[string]string{
 	"Monday":    "星期一,还有四天周末",
@@ -68,9 +71,11 @@ var SadWeekDayMap = map[string]string{
 	"Saturday":  "星期六",
 	"Sunday":    "星期日",
 }
+
 //Happy
 
 type HappySlice []Festival
+
 func (c HappySlice) Len() int { // 重写 Len() 方法
 	return len(c)
 }
@@ -80,6 +85,7 @@ func (c HappySlice) Swap(i, j int) { // 重写 Swap() 方法
 func (c HappySlice) Less(i, j int) bool { // 重写 Less() 方法， 从大到小排序
 	return c[i].subDay < c[j].subDay
 }
+
 type Festival struct {
 	chineseName string //节日中文名
 	subDay      int    //节日剩余日期
@@ -107,6 +113,7 @@ func (f *Festival) SetDate(s string) {
 func (f Festival) GetDate() string {
 	return f.date
 }
+
 var (
 	Countdown []Festival
 	//公历节日
@@ -142,11 +149,14 @@ var (
 	//其他
 	WinterOlympics Festival //冬奥会
 )
+
 const (
 	Year = 365 //一年多少天
 )
+
 //Sad
 type SadSlice []Involution
+
 func (s SadSlice) Len() int { // 重写 Len() 方法
 	return len(s)
 }
@@ -156,6 +166,7 @@ func (s SadSlice) Swap(i, j int) { // 重写 Swap() 方法
 func (s SadSlice) Less(i, j int) bool { // 重写 Less() 方法， 从大到小排序
 	return s[i].subDay < s[j].subDay
 }
+
 type Involution struct { //内卷
 	chineseName string //日期中文名
 	subDay      int    //日期倒计时
