@@ -50,3 +50,53 @@
 "ip": "127.0.0.1"
 }
 ```
+## 效果
+```shell
+# 2000次请求 每次并发50个
+$ hey -n 2000 -c 50 -m GET http://127.0.0.1:3306/HappyCount
+
+Summary:
+  Total:        15.0414 secs
+  Slowest:      0.4250 secs
+  Fastest:      0.1532 secs
+  Average:      0.3758 secs
+  Requests/sec: 132.9660
+
+  Total data:   3641870 bytes
+  Size/request: 1820 bytes
+
+Response time histogram:
+  0.153 [1]     |
+  0.180 [11]    |
+  0.208 [88]    |■■
+  0.235 [50]    |■
+  0.262 [0]     |
+  0.289 [3]     |
+  0.316 [46]    |■
+  0.343 [1]     |
+  0.371 [9]     |
+  0.398 [1424]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.425 [367]   |■■■■■■■■■■
+
+
+Latency distribution:
+  10% in 0.3440 secs
+  25% in 0.3871 secs
+  50% in 0.3893 secs
+  75% in 0.3930 secs
+  90% in 0.4054 secs
+  95% in 0.4149 secs
+  99% in 0.4231 secs
+
+Details (average, fastest, slowest):
+  DNS+dialup:   0.0000 secs, 0.1532 secs, 0.4250 secs
+  DNS-lookup:   0.0000 secs, 0.0000 secs, 0.0000 secs
+  req write:    0.0000 secs, 0.0000 secs, 0.0003 secs
+  resp wait:    0.3756 secs, 0.1532 secs, 0.4249 secs
+  resp read:    0.0001 secs, 0.0000 secs, 0.0008 secs
+
+Status code distribution:
+  [200] 2000 responses
+
+
+```
