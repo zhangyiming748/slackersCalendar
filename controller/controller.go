@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/zhangyiming748/slackersCalendar/model"
 	"github.com/zhangyiming748/slackersCalendar/util/log"
@@ -95,12 +94,13 @@ func Upload(ctx *gin.Context) {
 	}
 	//headers.Size 获取文件大小
 	if headers.Size > 1024*1024*2 {
-		fmt.Println("文件太大了")
+		ctx.String(http.StatusRequestEntityTooLarge,"文件太大了(2M以下)")
 		return
 	}
-	//headers.Header.Get("Content-Type")获取上传文件的类型
+	//获取上传文件的类型
+	headers.Header.Get("Content-Type")
 	if headers.Header.Get("Content-Type") != "text/plain" {
-		fmt.Println("只允许上传txt文本文件")
+		ctx.String(http.StatusUnsupportedMediaType,"只允许上传txt文本文件")
 		return
 	}
 

@@ -14,7 +14,7 @@
 ###WebServer(port int)
 # 接口
 需要传入端口号开启服务
-##WebServer(port int)
+## WebServer(port int)
 
 ### HappyCount
 ```
@@ -50,6 +50,17 @@
 "ip": "127.0.0.1"
 }
 ```
+
+### Upload
+
+
+```
+@ 请求示例
+{post} http://127.0.0.1:3306/upload
+
+允许上传2M以下txt文件
+```
+
 ## 效果
 ```shell
 # 2000次请求 每次并发50个
