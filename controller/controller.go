@@ -5,6 +5,8 @@ import (
 	"github.com/zhangyiming748/slackersCalendar/model"
 	"github.com/zhangyiming748/slackersCalendar/util/log"
 	"net/http"
+	"strconv"
+	"strings"
 	"sync"
 )
 
@@ -87,27 +89,53 @@ func Sad(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, content)
 }
+
+type file struct {
+	F_type string `json:"f_type"`
+	F_size string `json:"f_size"`
+	F_err  string `json:"f_err"`
+}
+
 func Upload(ctx *gin.Context) {
 	_, headers, err := ctx.Request.FormFile("file")
 	if err != nil {
 		log.Info.Printf("Error when try to get file: %v", err)
 	}
+	var result file
+	//获取上传文件的类型
+	if headers.Header.Get("Content-Type") != "text/plain" {
+		result = file{
+			F_size: strconv.FormatInt(headers.Size, 10),
+			F_err:  "只允许上传txt文本文件",
+			F_type: headers.Header.Get("Content-Type"),
+		}
+		ctx.JSON(http.StatusUnsupportedMediaType, result)
+		return
+	}
 	//headers.Size 获取文件大小
 	if headers.Size > 1024*1024*2 {
-		ctx.String(http.StatusRequestEntityTooLarge,"文件太大了(2M以下)")
+		m_size := float64(headers.Size) / 1024 / 1024
+		result = file{
+			F_size: strings.Join([]string{strconv.FormatFloat(m_size, 'f', 2, 64), "M"}, ""),
+			//TODO 更改错误返回文字内容
+			F_err:  "文件太大了(2M以下)",
+			F_type: headers.Header.Get("Content-Type"),
+		}
+		ctx.JSON(http.StatusRequestEntityTooLarge, result)
 		return
 	}
-	//获取上传文件的类型
-	headers.Header.Get("Content-Type")
-	if headers.Header.Get("Content-Type") != "text/plain" {
-		ctx.String(http.StatusUnsupportedMediaType,"只允许上传txt文本文件")
-		return
-	}
-
 	if err := ctx.SaveUploadedFile(headers, "./users.txt"); err != nil {
+		result = file{
+			F_err: "上传文件失败,目录是否不可写?",
+		}
+		ctx.JSON(http.StatusRequestEntityTooLarge, result)
 		return
 	}
-	ctx.String(http.StatusOK, headers.Filename)
+	result = file{
+		F_size: strconv.Itoa(int(headers.Size)),
+		F_type: headers.Header.Get("Content-Type"),
+	}
+	ctx.JSON(http.StatusOK, result)
 }
 func getRequestIP(c *gin.Context) string {
 	reqIP := c.ClientIP()
