@@ -3,7 +3,7 @@ package model
 import (
 	"fmt"
 	"github.com/nosixtools/solarlunar"
-	"github.com/zhangyiming748/slackersCalendar/util/log"
+	"github.com/zhangyiming748/slackersCalendar/util"
 	"sort"
 	"strconv"
 	"strings"
@@ -218,6 +218,7 @@ func nextYear() string {
 	s := strconv.Itoa(i)
 	return s
 }
+
 /*
 上班是帮老板赚钱,摸鱼是赚老板的钱!
 该休息就休息,该放松就放松
@@ -250,31 +251,36 @@ func nextYear() string {
 距离圣诞节还有348天
 距离腊八节还有353天
 距离元旦还有356天
- */
-func HappyDay() {
-	log.Debug.Println("上班是帮老板赚钱,摸鱼是赚老板的钱!")
-	log.Debug.Println("该休息就休息,该放松就放松")
-	for _, v := range Countdown {
-		if v.GetSubDay() == 0 || v.GetSubDay() == 365 {
-			log.Debug.Printf("明天是%v\n", v.GetChineseName())
-			continue
-		}
-	}
+*/
+func HappyDay() []string {
+	result := make([]string, 0)
+	result = append(result, util.ReadAndWrite("上班是帮老板赚钱,摸鱼是赚老板的钱!"))
+	result = append(result, util.ReadAndWrite("该休息就休息,该放松就放松"))
+	//for _, v := range Countdown {
+	//	if v.GetSubDay() == 0 || v.GetSubDay() == 365 {
+	//		result = append(result, util.ReadAndWrite(strings.Join([]string{"明天是",v.GetChineseName()},"")))
+	//		continue
+	//	}
+	//}
 	for _, v := range Countdown {
 		if v.GetSubDay() < 0 {
 			continue
 		}
 
 		if v.GetSubDay() == 0 || v.GetSubDay() == 365 {
-			log.Debug.Printf("明天是%v\n", v.GetChineseName())
+			result = append(result, util.ReadAndWrite(strings.Join([]string{"明天是", v.GetChineseName()}, "")))
 			continue
 		}
-		log.Debug.Printf("距离%v还有%v天\n", v.GetChineseName(), v.GetSubDay())
+		result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetChineseName(), "还有", string(v.GetSubDay()), "天"}, "")))
 	}
+	return result
 }
+
 /*
 最后,祝愿天下所有摸鱼人,都能愉快的渡过每一天
- */
-func HappyFinnal() {
-	log.Debug.Println("最后,祝愿天下所有摸鱼人,都能愉快的渡过每一天")
+*/
+func HappyFinnal() []string {
+	result := make([]string, 0)
+	result = append(result, util.ReadAndWrite("最后,祝愿天下所有摸鱼人,都能愉快的渡过每一天"))
+	return result
 }

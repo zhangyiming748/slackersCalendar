@@ -16,7 +16,7 @@ import (
 
 func Happy(ctx *gin.Context) {
 	line:=model.HappyTimer()
-	model.HappyDay()
+	app1:=model.HappyDay()
 	model.Gift()
 	model.AnniversaryDay()
 	model.HappyFinnal()
