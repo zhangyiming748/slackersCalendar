@@ -6,16 +6,21 @@ import (
 	"io"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 )
+
 /*
 铁打的身体,磁铁打的床
- */
-func Gift() {
+*/
+func Gift() []string {
+	result := make([]string, 0)
 	src := "./users.txt"
-	if isExist(src){
+	if isExist(src) {
 		users := readLine(src)
 		for _, user := range users {
+			strings.Join([]string{"帝豪全体技师预祝大客户", user, "节日快乐,期待您的下次光临"}, "")
+			result = append(result, strings.Join([]string{"帝豪全体技师预祝大客户", user, "节日快乐,期待您的下次光临"}, ""))
 			fmt.Printf("帝豪全体技师预祝大客户%v节日快乐,期待您的下次光临\n", user)
 			fmt.Printf("豪庭全体技师预祝大客户%v节日快乐,期待您的下次光临\n", user)
 			fmt.Printf("君怡全体技师预祝大客户%v节日快乐,期待您的下次光临\n", user)
@@ -48,6 +53,8 @@ func Gift() {
 	}
 	rand.Seed(time.Now().Unix())
 	fmt.Println(words[rand.Intn(len(words))])
+	result = append(result, words[rand.Intn(len(words))])
+	return result
 }
 func readLine(src string) []string {
 	fi, err := os.Open(src)
@@ -72,13 +79,13 @@ func readLine(src string) []string {
 	}
 	return names
 }
-func isExist(fname string)bool {
+func isExist(fname string) bool {
 	_, err := os.Stat(fname)
-	if err == nil{
+	if err == nil {
 		//log.Info.Println("File exist")
 		return true
 	}
-	if os.IsNotExist(err){
+	if os.IsNotExist(err) {
 		//log.Info.Println("File not exist")
 		return false
 	}

@@ -271,7 +271,7 @@ func HappyDay() []string {
 			result = append(result, util.ReadAndWrite(strings.Join([]string{"明天是", v.GetChineseName()}, "")))
 			continue
 		}
-		result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetChineseName(), "还有", string(v.GetSubDay()), "天"}, "")))
+		result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetChineseName(), "还有", strconv.Itoa(v.GetSubDay()), "天"}, "")))
 	}
 	return result
 }

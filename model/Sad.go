@@ -1,8 +1,9 @@
 package model
 
 import (
-	"github.com/zhangyiming748/slackersCalendar/util/log"
 	"sort"
+	"strconv"
+	"strings"
 )
 
 //输入sad列表
@@ -17,12 +18,9 @@ func init() {
 /*
 距离高考还有147天
  */
-func SadDay() {
-	for _, v := range Lyingflat {
-		if v.GetSubDay() == 0 || v.GetSubDay() == 365 {
-			log.Debug.Printf("\t%v\n", v.GetChineseName())
-		}
-	}
+func SadDay()[]string {
+	result :=make([]string,0)
+
 	for _, v := range Lyingflat {
 		if v.GetSubDay() < 0 {
 			continue
@@ -31,6 +29,8 @@ func SadDay() {
 			//log.Debug.Printf("明天是%v\n", v.GetChineseName())
 			continue
 		}
-		log.Debug.Printf("距离%v还有%v天\n", v.GetChineseName(), v.GetSubDay())
+
+		result = append(result,strings.Join([]string{"距离",v.GetChineseName(),"还有",strconv.Itoa(v.GetSubDay()),"天"},""))
 	}
+	return result
 }
