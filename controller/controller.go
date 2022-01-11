@@ -15,15 +15,14 @@ import (
 )
 
 func Happy(ctx *gin.Context) {
-	model.HappyTimer()
+	line:=model.HappyTimer()
 	model.HappyDay()
 	model.Gift()
 	model.AnniversaryDay()
 	model.HappyFinnal()
-	info:=readLine("./info.txt")
 	content := HappyJson{
 		Title:    "Happy",
-		Contents: info,
+		Contents: line,
 		Ip:       getRequestIP(ctx),
 	}
 	ctx.JSON(http.StatusOK, content)
