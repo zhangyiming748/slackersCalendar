@@ -16,7 +16,7 @@ import (
 周四不摸鱼,谁请肯德基
 周五不摸鱼,浪费好心情
 周六不摸鱼,活着真多余
-【摸鱼办】提醒您
+[摸鱼办]提醒您
 工作再累,一定不要忘记摸鱼哦!
 有事没事起身去茶水间,去厕所,去廊道走走
 吃饭时间就吃饭
@@ -71,12 +71,12 @@ func HappyTimer() []string {
 		result = append(result, util.ReadAndWrite("放工啦!唔使做咁多啦!"))
 		result = append(result, util.ReadAndWrite("做咁多,钱带去边度?"))
 		result = append(result, util.ReadAndWrite("差唔多七点咧!放工!"))
-		result = append(result, util.ReadAndWrite("落去茶室,饮下靓靓嘅杯......麦啤酒、黑啤酒,OK?"))
+		result = append(result, util.ReadAndWrite("落去茶室,饮下靓靓嘅杯......麦啤酒\黑啤酒,OK?"))
 		result = append(result, util.ReadAndWrite("Happy下,唔使做咁多."))
 		result = append(result, util.ReadAndWrite("死咗都冇用咧,银纸冇得带去咧!"))
 		result = append(result, util.ReadAndWrite("Happy下,饮酒,OK?"))
 	}
-	result = append(result, util.ReadAndWrite("【摸鱼办】提醒您"))
+	result = append(result, util.ReadAndWrite("[摸鱼办]提醒您"))
 	result = append(result, util.ReadAndWrite("工作再累,一定不要忘记摸鱼哦!"))
 	result = append(result, util.ReadAndWrite("有事没事起身去茶水间,去厕所,去廊道走走"))
 	result = append(result, util.ReadAndWrite("吃饭时间就吃饭"))
@@ -89,7 +89,7 @@ func HappyTimer() []string {
 /*
 下午好,继续卷!
 今天是2022年1月10日 下午4点39分52秒 星期一
-【内卷办】提醒您
+[内卷办]提醒您
 */
 func SadTimer() []string {
 	result := make([]string, 0)
@@ -118,6 +118,6 @@ func SadTimer() []string {
 	result = append(result, util.ReadAndWrite(nowDay))
 	result = append(result, util.ReadAndWrite(nowTime))
 	result = append(result, util.ReadAndWrite(SadWeekDayMap[week]))
-	result = append(result, util.ReadAndWrite("【内卷办】提醒您"))
+	result = append(result, util.ReadAndWrite("[内卷办]提醒您"))
 	return result
 }
