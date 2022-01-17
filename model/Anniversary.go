@@ -3,7 +3,6 @@ package model
 import (
 	"fmt"
 	"github.com/zhangyiming748/slackersCalendar/util"
-	"github.com/zhangyiming748/slackersCalendar/util/log"
 	"sort"
 	"strconv"
 	"strings"
@@ -21,6 +20,11 @@ func init() {
 	Apple.SetDate("2007年1月9日")
 	Apple.SetSubDay(CountDay(Apple.GetDate()))
 	AS = append(AS, Apple)
+
+	Nuclear.SetName("中国第一枚实用氢弹试爆成功")
+	Nuclear.SetDate("1972年1月7日")
+	Nuclear.SetSubDay(CountDay(Nuclear.GetDate()))
+	AS = append(AS, Nuclear)
 
 	sort.Sort(AS)
 }
@@ -49,7 +53,6 @@ func AnniversaryDay() []string {
 		switch v.GetName() {
 		case "快播关闭":
 			result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetName(), "已经过去了", strconv.Itoa(v.GetSubDay()), "年,但你还欠王欣一个年费会员"}, "")))
-			log.Debug.Printf("距离%v已经过去了%v周年\t但你还欠王欣一个年费会员\n", v.GetName(), v.GetSubDay())
 		default:
 			result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetName(), "已经过去了", strconv.Itoa(v.GetSubDay()), "年"}, "")))
 		}
