@@ -256,20 +256,16 @@ func HappyDay() []string {
 	result := make([]string, 0)
 	result = append(result, util.ReadAndWrite("上班是帮老板赚钱,摸鱼是赚老板的钱!"))
 	result = append(result, util.ReadAndWrite("该休息就休息,该放松就放松"))
-	//for _, v := range Countdown {
-	//	if v.GetSubDay() == 0 || v.GetSubDay() == 365 {
-	//		result = append(result, util.ReadAndWrite(strings.Join([]string{"明天是",v.GetChineseName()},"")))
-	//		continue
-	//	}
-	//}
 	for _, v := range Countdown {
-		if v.GetSubDay() < 0 {
-			continue
-		}
-
-		if v.GetSubDay() == 0 || v.GetSubDay() == 365 {
-			result = append(result, util.ReadAndWrite(strings.Join([]string{"明天是", v.GetChineseName()}, "")))
-			continue
+		if v.GetSubDay() < 1 {
+			switch v.GetChineseName() {
+			case "七夕节":
+				result = append(result, fmt.Sprintf("今天是七夕节。看着走进电影院的情侣，我笑了笑，并掏出黑卡把今天所有的双数座都买了下来。它们的表情特别有趣，从刚走进电影院的欣喜，再到我扬言买下所有双数座的嘲讽，直到我掏出黑卡的惊讶与失望。每一个表情都令我十分欣慰。有钱人的快乐往往就是这么朴实无华且枯燥"))
+			case "情人节":
+				result = append(result, fmt.Sprintf("昨晚去看电影，电影院里坐满了一对对的情侣,我这个单身狗独自坐在第一排。就在准备熄灯开始放映前，工作人员在广播里说:\"哪位观众是川L88888的宾利车主,请去车库挪下车\"于是我果断地起身并在所有人的注视下走出了放映厅，到厕所抽了根烟"))
+			default:
+				result = append(result, fmt.Sprintf("今天是%v", v.GetChineseName()))
+			}
 		}
 		result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetChineseName(), "还有", strconv.Itoa(v.GetSubDay()), "天"}, "")))
 	}
