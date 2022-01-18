@@ -71,7 +71,7 @@ func HappyTimer() []string {
 		result = append(result, util.ReadAndWrite("放工啦!唔使做咁多啦!"))
 		result = append(result, util.ReadAndWrite("做咁多,钱带去边度?"))
 		result = append(result, util.ReadAndWrite("差唔多七点咧!放工!"))
-		result = append(result, util.ReadAndWrite("落去茶室,饮下靓靓嘅杯......麦啤酒\黑啤酒,OK?"))
+		result = append(result, util.ReadAndWrite("落去茶室,饮下靓靓嘅杯......麦啤酒黑啤酒,OK?"))
 		result = append(result, util.ReadAndWrite("Happy下,唔使做咁多."))
 		result = append(result, util.ReadAndWrite("死咗都冇用咧,银纸冇得带去咧!"))
 		result = append(result, util.ReadAndWrite("Happy下,饮酒,OK?"))
