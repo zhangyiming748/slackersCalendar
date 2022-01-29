@@ -19,7 +19,6 @@ func Gift() []string {
 	if isExist(src) {
 		users := readLine(src)
 		for _, user := range users {
-
 			result = append(result, strings.Join([]string{"帝豪全体技师预祝大客户", user, "节日快乐,期待您的下次光临"}, ""))
 			result = append(result, strings.Join([]string{"豪庭全体技师预祝大客户", user, "节日快乐,期待您的下次光临"}, ""))
 			result = append(result, strings.Join([]string{"君怡全体技师预祝大客户", user, "节日快乐,期待您的下次光临"}, ""))
