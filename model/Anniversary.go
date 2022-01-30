@@ -2,7 +2,6 @@ package model
 
 import (
 	"fmt"
-	"github.com/zhangyiming748/slackersCalendar/util"
 	"sort"
 	"strconv"
 	"strings"
@@ -52,9 +51,9 @@ func AnniversaryDay() []string {
 		//fmt.Printf("距离%v已经过去了%v周年\n", v.GetName(), v.GetSubDay())
 		switch v.GetName() {
 		case "快播关闭":
-			result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetName(), "已经过去了", strconv.Itoa(v.GetSubDay()), "年,但你还欠王欣一个年费会员"}, "")))
+			result = append(result, strings.Join([]string{"距离", v.GetName(), "已经过去了", strconv.Itoa(v.GetSubDay()), "年,但你还欠王欣一个年费会员"}, ""))
 		default:
-			result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetName(), "已经过去了", strconv.Itoa(v.GetSubDay()), "年"}, "")))
+			result = append(result, strings.Join([]string{"距离", v.GetName(), "已经过去了", strconv.Itoa(v.GetSubDay()), "年"}, ""))
 		}
 	}
 	return result

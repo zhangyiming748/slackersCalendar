@@ -3,7 +3,6 @@ package model
 import (
 	"fmt"
 	"github.com/nosixtools/solarlunar"
-	"github.com/zhangyiming748/slackersCalendar/util"
 	"sort"
 	"strconv"
 	"strings"
@@ -254,8 +253,8 @@ func nextYear() string {
 */
 func HappyDay() []string {
 	result := make([]string, 0)
-	result = append(result, util.ReadAndWrite("上班是帮老板赚钱,摸鱼是赚老板的钱!"))
-	result = append(result, util.ReadAndWrite("该休息就休息,该放松就放松"))
+	result = append(result, "上班是帮老板赚钱,摸鱼是赚老板的钱!")
+	result = append(result, "该休息就休息,该放松就放松")
 	for _, v := range Countdown {
 		if v.GetSubDay() < 1 {
 			switch v.GetChineseName() {
@@ -267,7 +266,7 @@ func HappyDay() []string {
 				result = append(result, fmt.Sprintf("今天是%v", v.GetChineseName()))
 			}
 		}
-		result = append(result, util.ReadAndWrite(strings.Join([]string{"距离", v.GetChineseName(), "还有", strconv.Itoa(v.GetSubDay()), "天"}, "")))
+		result = append(result, strings.Join([]string{"距离", v.GetChineseName(), "还有", strconv.Itoa(v.GetSubDay()), "天"}, ""))
 	}
 	return result
 }
@@ -277,6 +276,6 @@ func HappyDay() []string {
 */
 func HappyFinnal() []string {
 	result := make([]string, 0)
-	result = append(result, util.ReadAndWrite("最后,祝愿天下所有摸鱼人,都能愉快的渡过每一天"))
+	result = append(result, "最后,祝愿天下所有摸鱼人,都能愉快的渡过每一天")
 	return result
 }

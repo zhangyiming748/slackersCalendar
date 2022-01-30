@@ -2,7 +2,6 @@ package model
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"math/rand"
 	"os"
@@ -50,7 +49,7 @@ func Gift() []string {
 		}
 	}
 	rand.Seed(time.Now().Unix())
-	fmt.Println(words[rand.Intn(len(words))])
+	//fmt.Println(words[rand.Intn(len(words))])
 	result = append(result, words[rand.Intn(len(words))])
 	return result
 }
