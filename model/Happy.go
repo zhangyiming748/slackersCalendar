@@ -160,7 +160,8 @@ func init() {
 }
 func allInSolar(date string) int {
 	day := strings.Join([]string{thisYear(), date}, "-")
-	ret, _ := time.Parse("2006-01-02", day)
+	zone := strings.Join([]string{day, "0800"}, "+")
+	ret, _ := time.Parse("2006-01-02-0700", zone)
 	unsub := ret.Sub(time.Now())
 	if unsub < 0 {
 		return int(unsub.Hours())/24 + Year
@@ -171,7 +172,8 @@ func allInSolar(date string) int {
 //计算特殊日期 如奥运会
 func allInThisYear(date string) int {
 	day := date
-	ret, _ := time.Parse("2006-01-02", day)
+	zone := strings.Join([]string{day, "0800"}, "+")
+	ret, _ := time.Parse("2006-01-02-0700", zone)
 	unsub := ret.Sub(time.Now())
 	if unsub < 0 {
 		return int(unsub.Hours())/24 + Year
@@ -183,7 +185,8 @@ func allInThisYear(date string) int {
 func allInLuna(date string) int {
 	day := strings.Join([]string{thisYear(), date}, "-")
 	convert := solarlunar.LunarToSolar(day, false)
-	ret, _ := time.Parse("2006-01-02", convert)
+	zone := strings.Join([]string{convert, "0800"}, "+")
+	ret, _ := time.Parse("2006-01-02-0700", zone)
 	unsub := ret.Sub(time.Now())
 	if unsub < 0 {
 		return int(unsub.Hours())/24 + Year
